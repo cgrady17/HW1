@@ -1,5 +1,5 @@
 /*<listing chapter="2" section="3" sequence="1">*/
-//package KW.CH02;
+//package KW.CH02; // Is this important?
 
 import java.util.Arrays;
 import java.util.AbstractList;
