@@ -4,6 +4,7 @@
 import java.util.Arrays;
 import java.util.AbstractList;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * This class implements some of the methods of the Java
@@ -131,7 +132,7 @@ public class KWArrayList<E>
      * @param capacity The initial capacity
      */
     public KWArrayList(int capacity) {
-        throw new RuntimeException("Unsupported operation.");
+        theData = (E[]) new Object[capacity];
     }
 
 
@@ -143,25 +144,69 @@ public class KWArrayList<E>
      *          or -1 if this list does not contain the element
      */
     public int indexOf(Object item) {
-        throw new RuntimeException("Unsupported operation.");
+        int Index = -1;
+        for (int i = 0; (i < theData.length && Index == -1); i++) {
+            if (theData[i] == item) {
+                Index = i;
+            }
+        }
+        return Index;
     }
 
     public static void reverse(ArrayList l){
-        throw new RuntimeException("Unsupported operation.");
+        if (l.size() > 1) {
+            Object val = l.remove(0);
+            reverse(l);
+            l.add(val);
+        }
+
+        // Couldn't we just call Collections.reverse(l)??
     }
 
     public static void remove(ArrayList l, Object target){
-        throw new RuntimeException("Unsupported operation.");
+        Iterator<Integer> i = l.iterator();
+
+        while (i.hasNext()) {
+            Integer thisObj = i.next();
+            if (thisObj == target) {
+                l.remove(thisObj);
+            }
+        }
     }
 
     public static ArrayList<Integer> arrayDouble(ArrayList<Integer> l){
-        throw new RuntimeException("Unsupported operation.");
+        ArrayList<Integer> thisL = new ArrayList<Integer>();
+        for (Integer i : l) {
+            Integer thisInt = i;
+            thisL.add(new Integer(i * 2));
+        }
+        return thisL;
     }
 
     public static void main(String[] args){
         //test your methods here to make sure they work.
         KWArrayList<Integer> l = new KWArrayList();
         l.add(5);
+        System.out.println("Current KWArrayList: " + l);
+
+        ArrayList<Integer> al = new ArrayList<Integer>();
+        al.add(1);
+        al.add(2);
+        al.add(3);
+
+        System.out.println("Starting ArrayList: " + al);
+
+        reverse(al);
+
+        System.out.println("Reversed ArrayList: " + al);
+
+        arrayDouble(al);
+
+        System.out.println("Reversed & Doubled ArrayList: " + al);
+
+        remove(al, 3);
+
+        System.out.println("Arraylist with (int)3 removed: " + al);
 
     }
 }
